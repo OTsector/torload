@@ -1,0 +1,7 @@
+#!/bin/bash
+var="1"
+if [ "$var" -eq "$var" ] ; then
+	echo "ki"
+else
+	echo "ara"
+fi
