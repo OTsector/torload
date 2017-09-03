@@ -1,7 +1,22 @@
 #!/bin/bash
-var="1"
-if [ "$var" -eq "$var" ] ; then
-	echo "ki"
+red=`tput setaf 1`
+green=`tput setaf 2`
+blue=`tput setaf 6`
+yellow=`tput setaf 3`
+reset=`tput sgr0`
+
+re='^[0-9]+$'
+if [[ $1 =~ $re ]] ; then
+	while [[ true ]]; do
+		service tor reload
+		sleep $1s
+		{
+		myip=$(pc myip)
+		} &>> /dev/null
+		echo "Current ${red}IP${reset} is: "${green}$myip${reset}
+	done
 else
-	echo "ara"
+	echo -e "\nuse: torload ${green}[second]${reset} , or: torload ${green}[second]${reset} --${blue}hidden${reset}\n\n////////////////\nFor example:\n${yellow}webserver start${reset}\n////////////////\n"
 fi
+
+exit 0
