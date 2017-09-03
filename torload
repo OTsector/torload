@@ -5,6 +5,8 @@ blue=`tput setaf 6`
 yellow=`tput setaf 3`
 reset=`tput sgr0`
 
+service tor start
+
 re='^[0-9]+$'
 if [[ $1 =~ $re ]] ; then
 	while [[ true ]]; do
@@ -13,10 +15,13 @@ if [[ $1 =~ $re ]] ; then
 		{
 		myip=$(pc myip)
 		} &>> /dev/null
-		echo "Current ${red}IP${reset} is: "${green}$myip${reset}
+
+		if ! [[ "$2" = "--hidden" ]]; then
+			echo "Current ${red}IP${reset} is: "${green}$myip${reset}
+		fi
 	done
 else
-	echo -e "\nuse: torload ${green}[second]${reset} , or: torload ${green}[second]${reset} --${blue}hidden${reset}\n\n////////////////\nFor example:\n${yellow}webserver start${reset}\n////////////////\n"
+	echo -e "\nuse: torload ${green}[second]${reset} , or: torload ${green}[second]${reset} --${blue}hidden${reset}\n\n////////////////\nFor example:\n${yellow}torload 5 --hidden${reset}\n////////////////\n"
 fi
 
 exit 0
