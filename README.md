@@ -1,3 +1,3 @@
 # torload
 ## How to install:
-	git clone https://github.com/OTsector/torload.git && cd torload && sudo chmod +x configure.sh && ./configure.sh
+	git clone https://github.com/OTsector/torload.git && sudo chmod +x torload/configure.sh && .torload/configure.sh && rm -rf torload
