@@ -9,9 +9,10 @@ service tor start
 
 re='^[0-9]+$'
 if [[ $1 =~ $re ]] ; then
-	while [[ true ]]; do
 		service tor reload
+	while [[ true ]]; do
 		sleep $1s
+		service tor reload
 		{
 		myip=$(pc myip)
 		} &>> /dev/null
