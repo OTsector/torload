@@ -1,6 +1,10 @@
 #!/bin/bash
 sudo apt-get install proxychains tor curl -y
-sudo cp -R pc myip torload /usr/bin -f
+sudo cp pc.sh /usr/bin/pc
+sudo cp -f /usr/bin/proxychains /usr/bin/pc
+sudo sed 's/echo "ProxyChains/#echo "ProxyChains/g' -i /usr/bin/pc
+sudo cp myip.sh /usr/bin/myip
+sudo cp torload.sh /usr/bin/torload
 sudo chmod +x /usr/bin/pc
 sudo chmod +x /usr/bin/myip
 sudo chmod +x /usr/bin/torload
