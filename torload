@@ -14,7 +14,9 @@ if [[ $1 =~ $re ]] ; then
 		sleep $1s
 		service tor reload
 		{
-		myip=$(pc myip)
+		if ! [[ "$2" = "--hidden" ]]; then
+			myip=$(pc myip)
+		fi
 		} &>> /dev/null
 
 		if ! [[ "$2" = "--hidden" ]]; then
