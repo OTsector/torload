@@ -5,14 +5,14 @@ blue=`tput setaf 6`
 yellow=`tput setaf 3`
 reset=`tput sgr0`
 
-service tor start
+service tor start &> /dev/null
 
 re='^[0-9]+$'
 if [[ $1 =~ $re ]] ; then
-		service tor reload
+		service tor reload &> /dev/null
 	while [[ true ]]; do
 		sleep $1s
-		service tor reload
+		service tor reload &> /dev/null
 		{
 		if ! [[ "$2" = "--hidden" ]]; then
 			myip=$(pc myip)
