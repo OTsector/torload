@@ -1,4 +1,5 @@
 #!/bin/bash
+sudo apt-get update
 sudo apt-get install proxychains tor curl -y
 sudo cp -f /usr/bin/proxychains /usr/bin/pc
 sudo sed 's/echo "ProxyChains/#echo "ProxyChains/g' -i /usr/bin/pc
