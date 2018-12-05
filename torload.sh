@@ -5,14 +5,19 @@ blue=`tput setaf 6`
 yellow=`tput setaf 3`
 reset=`tput sgr0`
 
+if [[ $EUID -ne 0 ]]; then
+	echo "This script must be run as root" 
+	exit 1
+fi
+
 service tor start &> /dev/null
 
 re='^[0-9]+$'
 if [[ $1 =~ $re ]] ; then
-		service tor reload &> /dev/null
+		service tor force-reload &> /dev/null
 	while [[ true ]]; do
 		sleep $1s
-		service tor reload &> /dev/null
+		service tor force-reload &> /dev/null
 		{
 		if ! [[ "$2" = "--hidden" ]]; then
 			myip=$(pc myip)
