@@ -11,3 +11,4 @@
 	torload
 	pc
 	myip
+	pcnmap
