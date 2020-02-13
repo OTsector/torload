@@ -12,5 +12,8 @@ for((i=1; i<$#; i++)); do
 	argv+="${argvArray[$i]} "
 done
 
-tor-resolve $hostname|pc nmap -sT -PN -n -sV $argv $(cat)
-
+if [[ ${hostname:${#hostname}-6} == ".onion" ]]; then
+	torsocks nmap -sT -PN -n -sV $argv $(cat) $hostname
+else
+	tor-resolve $hostname|pc nmap -sT -PN -n -sV $argv $(cat)
+fi
