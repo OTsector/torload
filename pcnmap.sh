@@ -5,6 +5,8 @@ if [ $# -lt 1 ]; then
 	exit 1
 fi
 
+service tor start &> /dev/null
+
 argvArray=($@)
 
 for((i=0; i<$#; i++)); do
