@@ -1,19 +1,36 @@
 #!/bin/bash
 
 if [ $# -lt 1 ]; then
-	echo "use: "$0" [hostname] [nmap arguments]"
+	nmap --help|sed 's/nmap/pcnmap/g'
 	exit 1
 fi
 
-hostname="$1"
 argvArray=($@)
 
-for((i=1; i<$#; i++)); do
+for((i=0; i<$#; i++)); do
+	if [ $i -ne 0 ] \
+		&& [[ ${argvArray[$i-1]::2} != "-p" ]] \
+		|| [[ ${argvArray[$i]::1} != "-" ]]; then
+			if [[ $hostname == "" ]]; then
+				hostname=${argvArray[$i]}
+			fi
+	fi
 	argv+="${argvArray[$i]} "
 done
 
+argv=$(sed "s/$hostname//g" <<< $argv)
+replace=$(sed 's/.*-p //g;s/\ -.*//g' <<< $argv)
+replacement=$(sed 's/.*-p //g;s/ -.*//g' <<< $argv|tr " " ",")
+argv=$(sed "s/$replace/$replacement/g" <<< $argv)
+
 if [[ ${hostname:${#hostname}-6} == ".onion" ]]; then
-	torsocks nmap -sT -PN -n -sV $argv $(cat) $hostname
+	host=$hostname
+	torsocks 2>/dev/null nmap -sT -Pn -n $argv $host \
+		|sed 's/nmap/pcnmap/g'
 else
-	tor-resolve $hostname|pc nmap -sT -PN -n -sV $argv $(cat)
+	host=$(tor-resolve $hostname)||exit 1
+	pc nmap -sT -Pn -n $argv $host \
+		|sed 's/nmap/pcnmap/g'
 fi
+echo $host
+
