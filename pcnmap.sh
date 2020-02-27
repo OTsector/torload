@@ -33,5 +33,3 @@ else
 	pc nmap -sT -Pn -n $argv $host \
 		|sed 's/nmap/pcnmap/g'
 fi
-echo $host
-
