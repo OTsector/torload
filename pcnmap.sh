@@ -5,8 +5,6 @@ if [ $# -lt 1 ]; then
 	exit 1
 fi
 
-service tor start &> /dev/null
-
 argvArray=($@)
 
 for((i=0; i<$#; i++)); do
@@ -21,10 +19,11 @@ for((i=0; i<$#; i++)); do
 done
 
 argv=$(sed "s/$hostname//g" <<< $argv)
-replace=$(sed 's/.*-p //g;s/\ -.*//g' <<< $argv)
-replacement=$(sed 's/.*-p //g;s/ -.*//g' <<< $argv|tr " " ",")
-argv=$(sed "s/$replace/$replacement/g" <<< $argv)
-
+if [[ $argv != " " ]]; then
+	replace=$(sed 's/.*-p //g;s/\ -.*//g' <<< $argv)
+	replacement=$(sed 's/.*-p //g;s/ -.*//g' <<< $argv|tr " " ",")
+	argv=$(sed "s/$replace/$replacement/g" <<< $argv)
+fi
 if [[ ${hostname:${#hostname}-6} == ".onion" ]]; then
 	host=$hostname
 	torsocks 2>/dev/null nmap -sT -Pn -n $argv $host \
