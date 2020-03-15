@@ -19,7 +19,7 @@ for((i=0; i<$#; i++)); do
 done
 
 argv=$(sed "s/$hostname//g" <<< $argv)
-if [[ $argv != " " ]]; then
+if [ $# -gt 2 ] && [[ $argv != " " ]]; then
 	replace=$(sed 's/.*-p //g;s/\ -.*//g' <<< $argv)
 	replacement=$(sed 's/.*-p //g;s/ -.*//g' <<< $argv|tr " " ",")
 	argv=$(sed "s/$replace/$replacement/g" <<< $argv)
