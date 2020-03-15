@@ -9,6 +9,7 @@ sudo cp pcnmap.sh /usr/bin/pcnmap
 sudo chmod +x /usr/bin/pc
 sudo chmod +x /usr/bin/myip
 sudo chmod +x /usr/bin/torload
+sudo chmod +x /usr/bin/pcnmap
 sudo sed 's/#quiet_mode/quiet_mode/g' -i /etc/proxychains.conf
 sudo sed 's/proxy_dns/#proxy_dns/g' -i /etc/proxychains.conf
 clear
