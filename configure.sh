@@ -1,6 +1,7 @@
 #!/bin/bash
 sudo apt-get update
 sudo apt-get install proxychains tor curl tor-resolve -y
+sudo systemctl enable tor
 sudo cp -f /usr/bin/proxychains /usr/bin/pc
 sudo sed 's/echo "ProxyChains/#echo "ProxyChains/g' -i /usr/bin/pc
 sudo cp myip.sh /usr/bin/myip
