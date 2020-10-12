@@ -21,7 +21,7 @@ done
 argv=$(sed "s/$hostname//g" <<< $argv)
 if [ $# -gt 2 ] && [[ $argv != " " ]]; then
 	replace=$(sed 's/.*-p //g;s/\ -.*//g' <<< $argv)
-	replacement=$(sed 's/.*-p //g;s/ -.*//g;s/, /,/g;s/ /,/g' <<< $argv) # tr " " ",")
+	replacement=$(sed 's/.*-p //g;s/ -.*//g;s/, /,/g;s/ /,/g' <<< $argv)
 	argv=$(sed "s/$replace/$replacement/g" <<< $argv)
 fi
 if [[ ${hostname:${#hostname}-6} == ".onion" ]]; then
