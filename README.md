@@ -12,3 +12,4 @@
 	pc
 	myip
 	pcnmap
+	subdomain
