@@ -1,6 +1,6 @@
 #!/bin/bash
 sudo apt-get update
-sudo apt-get install proxychains tor curl tor-resolve -y
+sudo apt-get install proxychains tor curl -y
 sudo systemctl enable tor
 sudo echo -e '#!/bin/bash\nproxychains 2> /dev/null "$@"\n' > /usr/bin/pc
 sed 's/^echo "ProxyChains/#&/g' -i /usr/bin/proxychains 
